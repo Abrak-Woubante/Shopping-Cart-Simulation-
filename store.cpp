@@ -1,41 +1,20 @@
-/*
-* Name: Abrak Woubante, 5007305246, AS4
-* Description: Storefront 
-* Input: txt files
-* Output: shopping cart and total 
-*/
 #include "store.h"
 #include "shopping_cart.h"
 
-/*
-* function_identifier: initialize the itemCatalog array
-* parameters: istream
-* return value: none
-*/
 void Store::readItemsFromFile(istream& itemsFile)
 {
-	//This function should should initialize the itemCatalog array.
-	//The array is dynamically allocated - that is, it is created during the runtime of the program.
-	//Since the size of the array is not known while we are programming, we will instead figure it out later while running
-
-	//Initialize both the itemCatalog array and the catalogSize
-	//The first value in the file is the integer count of how many items are to be in the catalog
-	//Read the value in, allocate the Item array using the new keyword.
-	//Afterwards, each line contains 3 values representing one item: the quantity, price, and name of each item
-	//Read in these 3 values with appropriate data types and use them to construct an Item and place it into the array
-	//Note that the name of the item may be a string with spaces, so getline is appropriate
 
 	string tempName;
 	int tempQuantity;
 	float tempPrice;
 
-	//TODO: Finish the function
+
 	itemsFile>>catalogSize;
 	itemCatalog = new Item*[catalogSize];
 	for(int i = 0 ; i < catalogSize;i++){
 		itemsFile>>tempQuantity;
 		itemsFile>>tempPrice;
-		getline(itemsFile,tempName);//because it has spaces
+		getline(itemsFile,tempName);
 		itemCatalog[i]=new Item(tempName,tempQuantity,tempPrice);
 	}
 
@@ -43,17 +22,14 @@ void Store::readItemsFromFile(istream& itemsFile)
 
 Store::~Store()
 {
-	//TODO: Finish the function
 	for(int i =0;i<catalogSize;i++){
-		delete itemCatalog[i]; //same thing 
+		delete itemCatalog[i]; 
 	}
 	    delete [] itemCatalog;
 }
 
 
-//------------------------------------------- SKELETON CODE -------------------------------------------
 
-//Used for making a random permutation of Items
 int primitiveRoots[] = { 3, 6, 7, 13, 14, 15, 19, 23, 24, 26, 27, 28, 29, 30, 31, 33, 35, 38, 41,
 43, 46, 48, 51, 54, 56, 58, 59, 60, 61, 62, 63, 65, 66, 70, 74, 75, 76, 82, 83, 86 };
 const int ROOTS_COUNT = 40;
